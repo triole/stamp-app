@@ -1,0 +1,20 @@
+version: '3'
+
+tasks:
+    default:
+        desc: default rdmo dockers build, from github master
+        cmds:
+            - cmd: ./sh/prepare/render_yaml.sh {{.DC_TEMP}} {{.CONFIG}}
+            - cmd: ./sh/prepare/render_variables_env.sh .
+            - task: build_dockers
+            - task: log
+
+    install:
+        desc: copy ddp app to docker and update local.py
+        cmds:
+            - cmd: docker exec rdmo mkdir -p /home/rdmo/ddp-app
+            - cmd: docker cp ./ rdmo:/home/rdmo/ddp-app
+            - cmd: docker exec rdmo /home/rdmo/ddp-app/sh/add_app.sh
+            - cmd: >-
+                docker exec rdmo
+                python /home/rdmo/rdmo-app/manage.py collectstatic --no-input
