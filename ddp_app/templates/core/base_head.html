@@ -3,7 +3,7 @@
 {% load core_tags %}
 
 
-    <title>BUBA --- {{ request.site.name }}</title>
+    <title>{{ request.site.name }}</title>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -28,3 +28,4 @@
     {% endcompress %}
 
     <script src="{% static 'glossary.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'glossary.css' %}">

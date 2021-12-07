@@ -1,0 +1,13 @@
+span.glossary {
+    border-bottom: 1px dashed #43494a;
+}
+
+#glossary_info {
+    color: #fff;
+    background-color: #337ab7;
+    padding: 10px;
+    max-width: 220px;
+    position: absolute;
+    display: none;
+    box-shadow: 2px 2px 4px #000;
+}
