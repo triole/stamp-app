@@ -15,6 +15,9 @@ tasks:
 
     install:
         desc: copy ddp app to docker and update local.py
+        sources:
+            - ddp_app/static/*
+        method: timestamp
         cmds:
             - cmd: docker exec {{.CONTAINER}} mkdir -p /home/rdmo/ddp-app
             - cmd: docker cp ./ {{.CONTAINER}}:/home/rdmo/ddp-app
@@ -22,3 +25,4 @@ tasks:
             - cmd: >-
                 docker exec {{.CONTAINER}}
                 python /home/rdmo/rdmo-app/manage.py collectstatic --no-input
+            - cmd: reload-browser
