@@ -45,11 +45,12 @@ function replace(html) {
         Object.keys(glossary).forEach(function(term) {
             var func_call = 'display_term(\'' + term + '\', this)';
             if (r.includes(term) === true && html.includes(func_call) === false) {
+                reg = new RegExp(' ' + term + ' ', 'g');
                 r = r.replace(
-                    term,
-                    '<a href="#">' +
+                    reg,
+                    ' <a href="#">' +
                     '<span onclick="' + func_call + '" class="glossary">' +
-                    term + '</span></a>'
+                    term + '</span></a> '
                 );
             }
         });
