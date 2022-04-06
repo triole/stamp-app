@@ -3,29 +3,32 @@
 {% load core_tags %}
 
 
-    <title>{{ request.site.name }}</title>
+<title>{{ request.site.name }}</title>
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <meta property="og:title" content="{{ request.site.name }}" />
-    <meta property="og:url" content="{{ request.site.domain }}" />
+<meta property="og:title" content="{{ request.site.name }}" />
+<meta property="og:url" content="{{ request.site.domain }}" />
 
-    <meta name='baseurl' content="{% url 'home' %}" />
-    <meta name='staticurl' content="{% static '' %}" />
+<meta name='baseurl' content="{% url 'home' %}" />
+<meta name='staticurl' content="{% static '' %}" />
 
-    <link rel="shortcut icon" href="{% static 'core/img/favicon.png' %}" type="image/png" />
+<link rel="shortcut icon" href="{% static 'core/img/favicon.png' %}" type="image/png" />
 
-    {% vendor 'jquery' %}
-    {% vendor 'bootstrap' %}
-    {% vendor 'font-awesome' %}
+{% vendor 'jquery' %}
+{% vendor 'bootstrap' %}
+{% vendor 'font-awesome' %}
 
-    {% compress css %}
+{% compress css %}
     <link rel="stylesheet" type="text/x-scss" href="{% static 'core/css/base.scss' %}" />
     <link rel="stylesheet" type="text/x-scss" href="{% static 'core/css/fonts.scss' %}" />
     <link rel="stylesheet" type="text/x-scss" href="{% static 'core/css/footer.scss' %}" />
     <link rel="stylesheet" type="text/x-scss" href="{% static 'core/css/style.scss' %}" />
-    {% endcompress %}
+{% endcompress %}
 
-    <script src="{% static 'glossary.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'glossary.css' %}">
+<script src="{% static 'glossary.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'glossary.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'ddp_style.css' %}">
+
+<script src="{% static 'lib/showdown.min.js' %}"></script>
