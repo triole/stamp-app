@@ -1,3 +1,11 @@
 .ng-binding.form-label {
     font-weight: normal;
 }
+
+.question .help-text {
+    left: 35%;
+    position: relative;
+    max-width: 65%;
+    text-align: right;
+    font-style: italic;
+}
