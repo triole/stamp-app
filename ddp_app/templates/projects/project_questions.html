@@ -52,6 +52,18 @@
 
     <div class="project-questions-form" ng-show="service.questionset.id" ng-cloak>
 
+        <div class="ddp_requirements_display" style="display: none;">
+            {$ service.project.catalog.sections[0].questionsets[0].title $}
+        </div>
+        <div class="ddp_requirements_text" style="display: none;">
+            {% include 'projects/ddp_requirements.html' %}
+        </div>
+
+        <div class="requirements" style="display: none;">
+            <p ng-cloak>{$ service.project.catalog.sections[0].questionsets[0].title $}</p>
+            <p ng-cloak>{$ service.questionset.title $}</p>
+        </div>
+
         <h2>
             {$ service.questionset.section.title $}
         <br>
