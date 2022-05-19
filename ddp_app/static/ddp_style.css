@@ -9,3 +9,9 @@
     text-align: right;
     font-style: italic;
 }
+
+.no {
+    float: left;
+    margin-right: 6px;
+    font-weight: 700;
+}
