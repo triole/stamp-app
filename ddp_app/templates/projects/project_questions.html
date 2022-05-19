@@ -56,8 +56,9 @@
             {$ service.project.catalog.sections[0].questionsets[0].title $}
         </div>
         <div class="ddp_requirements_text" style="display: none;">
-            {% include 'projects/ddp_requirements.html' %}
+            {$ service.project.catalog.title $}
         </div>
+        {% include 'ddp_requirements/sweep.html' %}
 
         <div class="requirements" style="display: none;">
             <p ng-cloak>{$ service.project.catalog.sections[0].questionsets[0].title $}</p>

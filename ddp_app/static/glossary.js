@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var glossary;
     observe();
-    init();
+    init_glossary();
 });
 
 function observe() {
@@ -58,7 +58,7 @@ function replace(html) {
     return r;
 }
 
-function init() {
+function init_glossary() {
     add_info_div();
     $.getJSON("/static/glossary.json")
         .done(function(gl) {
