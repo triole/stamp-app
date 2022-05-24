@@ -2,7 +2,11 @@
     font-weight: normal;
 }
 
-.question .help-text {
+div[ng-hide*="questionset.id"] strong[class="ng-binding"] {
+    font-weight: normal;
+}
+
+.col-md-12 .help-text {
     left: 35%;
     position: relative;
     max-width: 65%;
