@@ -53,18 +53,20 @@
         var el = $('.ddp_requirements_text');
         var el_text = el.text().trim();
         var mod_no = match_first_no(el_text);
-        fetch('/static/ddp_requirements/m' + mod_no + '.html')
-            .then(function(response) {
-                return response.text()
-            })
-            .then(function(html) {
-                el.empty();
-                el.append(html);
-                el.append('<br>');
-            })
-            .catch(function(err) {
-                console.log('Failed to fetch page: ', err);
-            });
+        if (mod_no !== null) {
+            fetch('/static/ddp_requirements/m' + mod_no + '.html')
+                .then(function(response) {
+                    return response.text()
+                })
+                .then(function(html) {
+                    el.empty();
+                    el.append(html);
+                    el.append('<br>');
+                })
+                .catch(function(err) {
+                    console.log('Failed to fetch page: ', err);
+                });
+        }
     }
 
     function match_first_no(str) {
