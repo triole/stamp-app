@@ -290,6 +290,10 @@ angular.module('project_questions')
             .concat(questionset.questions.map(service.initQuestion))
             .sort(function(a, b) { return a.order - b.order; });
 
+        var converter = new showdown.Converter();
+        questionset.title = $sce.trustAsHtml(
+            converter.makeHtml(questionset.title)
+        );
         return questionset;
     };
 

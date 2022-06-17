@@ -68,7 +68,7 @@
         <h2>
             {$ service.questionset.section.title $}
         <br>
-            {$ service.questionset.title $}
+            <p ng-bind-html="service.questionset.title"></p>
         </h2>
 
         <div class="help-text" ng-bind-html="service.questionset.help"></div>
