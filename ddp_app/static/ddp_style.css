@@ -14,8 +14,14 @@ div[ng-hide*="questionset.id"] strong[class="ng-binding"] {
     font-style: italic;
 }
 
-.no {
+ul.list {
+    padding: 0px;
+    list-style-type: none;
+}
+
+li>p.no {
     float: left;
     margin-right: 6px;
     font-weight: 700;
+    list-style-type: none;
 }
