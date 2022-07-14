@@ -48,7 +48,9 @@ function init_observer() {
 
 // mandatory fields
 function init_mandatory_fields() {
-    $('body').prepend('<div id="mandatory_box"></div>');
+    $('body').prepend(
+        '<div id="mandatory_box"></div>'
+    );
 }
 
 function show_mandatory_box(clicked_element) {
@@ -64,7 +66,10 @@ function show_mandatory_box(clicked_element) {
 function mark_as_mandatory(html) {
     return html.replace(
         /(^<p>!+)(.*?)(<\/p>)/,
-        '<p>$2<span onclick="show_mandatory_box(this)" class="mandatory_field">!</span></p>'
+        '<p>$2' +
+        '<span onclick="show_mandatory_box(this)" class="mandatory_field">' +
+        '<i class="fa fa-exclamation-circle small" aria-hidden="true"></span>' + 
+        '</p>'
     );
 }
 
