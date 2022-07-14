@@ -1,9 +1,11 @@
 // observer and init
 $(document).ready(function() {
-    var glossary;
-    init_observer();
-    init_glossary();
-    init_mandatory_fields();
+    if (document.querySelector('.project-questions-form') !== null) {
+        var glossary;
+        init_observer();
+        init_glossary();
+        init_mandatory_fields();
+    }
 });
 
 function init_observer() {
@@ -68,7 +70,7 @@ function mark_as_mandatory(html) {
         /(^<p>!+)(.*?)(<\/p>)/,
         '<p>$2' +
         '<span onclick="show_mandatory_box(this)" class="mandatory_field">' +
-        '<i class="fa fa-exclamation-circle small" aria-hidden="true"></span>' + 
+        '<i class="fa fa-exclamation-circle small" aria-hidden="true"></span>' +
         '</p>'
     );
 }
