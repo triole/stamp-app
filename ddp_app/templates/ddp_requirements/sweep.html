@@ -56,12 +56,14 @@
         if (mod_no !== null) {
             fetch('/static/ddp_requirements/m' + mod_no + '.html')
                 .then(function(response) {
-                    return response.text()
+                    return response
                 })
-                .then(function(html) {
-                    el.empty();
-                    el.append(html);
-                    el.append('<br>');
+                .then(function(response) {
+                    if (response.code == 200) {
+                        el.empty();
+                        el.append(response.text());
+                        el.append('<br>');
+                    }
                 })
                 .catch(function(err) {
                     console.log('Failed to fetch page: ', err);
