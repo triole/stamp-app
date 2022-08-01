@@ -66,6 +66,9 @@ function show_mandatory_box(clicked_element) {
 }
 
 function mark_as_mandatory(html) {
+    if (typeof html !== 'string') {
+        return ''
+    }
     return html.replace(
         /(^<p>!+)(.*?)(<\/p>)/,
         '<p>$2' +
