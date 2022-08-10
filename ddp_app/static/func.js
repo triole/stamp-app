@@ -83,3 +83,8 @@ function get_postion(selector) {
     var off = $(selector).offset();
     return [off.left, off.top]
 }
+
+function to_markdown(str) {
+    var converter = new showdown.Converter();
+    return converter.makeHtml(str);
+}

@@ -290,10 +290,7 @@ angular.module('project_questions')
             .concat(questionset.questions.map(service.initQuestion))
             .sort(function(a, b) { return a.order - b.order; });
 
-        var converter = new showdown.Converter();
-        questionset.title = $sce.trustAsHtml(
-            converter.makeHtml(questionset.title)
-        );
+        questionset.title = $sce.trustAsHtml(to_markdown(questionset.title));
         return questionset;
     };
 
@@ -310,11 +307,7 @@ angular.module('project_questions')
         // this is a question!
         question.isQuestion = true;
 
-        var converter = new showdown.Converter();
-        question.text = $sce.trustAsHtml(
-            converter.makeHtml(question.text)
-        );
-
+        question.text = $sce.trustAsHtml(to_markdown(question.text));
         return question;
     };
 
