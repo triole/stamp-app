@@ -27,7 +27,7 @@
                                 ng-class="{'default-value': service.isDefaultValue(question, value) &&
                                                             option.id.toString() == value.selected}"/>
 
-                            <span ng-bind-html="option.text" >{$ option.text $}</span><span ng-show="option.additional_input">:</span>
+                            <span ng-bind-html="option.text"></span><span ng-show="option.additional_input">:</span>
 
                             <input class="form-control input-sm" type="text"
                                 ng-show="option.additional_input"
