@@ -338,6 +338,11 @@ angular.module('project_questions')
                             }
                         }).$promise);
                     } else {
+                        for (i = 0; i < optionset.options.length; i++) {
+                            optionset.options[i].text = $sce.trustAsHtml(
+                                to_markdown(optionset.options[i].text)
+                            );
+                        }
                         question.options = question.options.concat(optionset.options);
                     }
                 });
