@@ -1,0 +1,6 @@
+[{
+    "srcDir": ".",
+    "destDir": "/tmp",
+    "files": "**",
+    "command": "coda '${srcFile}'"
+}]
