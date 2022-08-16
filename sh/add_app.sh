@@ -19,13 +19,13 @@ function contains() {
 
 function append() {
     if [[ $(contains "${1}") == "false" ]]; then
-        echo -e "Append\n\n\"${2}\"\n\nto \"${lpy}\""
-        # echo -e "${2}" >> "${lpy}"
+        echo -e "Append\n\n\"${2}\"\n\nto \"${lpy}\n\""
+        echo -e "${2}" >>"${lpy}"
     fi
 }
 
 impsys=""
-cat "${lpy}" | grep "import sys" || impsys="import sys"
+cat "${lpy}" | grep "import sys" >/dev/null 2>&1 || impsys="import sys"
 
 append \
     "ddp_app" \
