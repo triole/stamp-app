@@ -14,7 +14,7 @@ function glossary_replace(html) {
     if (html !== undefined) {
         var r = html;
         Object.keys(glossary).forEach(function(term) {
-            var func_call = 'display_term(\'' + term + '\', this)';
+            var func_call = 'glossary_display_term(\'' + term + '\', this)';
             if (r.includes(term) === true && html.includes(func_call) === false) {
                 reg = new RegExp(' ' + term + ' ', 'g');
                 r = r.replace(
