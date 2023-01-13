@@ -31,7 +31,7 @@ function glossary_replace(html) {
 
 function glossary_display_term(term, clicked_element) {
     var pos = get_postion(clicked_element);
-    el = $('#glossary_info');
+    var el = $('#glossary_info');
     el.empty();
     el.css('left', pos[0]);
     el.css('top', pos[1] + 20);

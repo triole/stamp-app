@@ -57,7 +57,7 @@ function init_mandatory_fields() {
 
 function show_mandatory_box(clicked_element) {
     var pos = get_postion(clicked_element);
-    el = $('#mandatory_box');
+    var el = $('#mandatory_box');
     el.empty();
     el.css('left', pos[0]);
     el.css('top', pos[1] + 20);
