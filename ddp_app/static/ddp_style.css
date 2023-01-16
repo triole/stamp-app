@@ -7,9 +7,9 @@ div[ng-hide*="questionset.id"] strong[class="ng-binding"] {
 }
 
 .questions div[class*="col-md-"] .help-text :not(.purehtml):not(.purehtml *) {
-    left: 20%;
+    /* left: 20%; */
     position: relative;
-    max-width: 80%;
+    /* max-width: 80%; */
     text-align: right;
     font-style: italic;
 }
