@@ -19,9 +19,9 @@ function glossary_replace(html) {
                 reg = new RegExp(' ' + term + ' ', 'g');
                 r = r.replace(
                     reg,
-                    ' <a href="#">' +
-                    '<span onclick="' + func_call + '" class="glossary">' +
-                    term + '</span></a> '
+                    ' <a href="#" ' +
+                    'onclick="' + func_call + '">' +
+                    term + '</a> '
                 );
             }
         });
