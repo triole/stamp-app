@@ -22,7 +22,7 @@ tasks:
     desc: copy ddp app to docker and update local.py
     sources:
       - ddp_app/static/*
-    method: timestamp
+    method: checksum
     cmds:
       - cmd: docker exec {{.CONTAINER}} mkdir -p /home/rdmo/ddp-app
       - cmd: docker cp ./ {{.CONTAINER}}:/home/rdmo/ddp-app
