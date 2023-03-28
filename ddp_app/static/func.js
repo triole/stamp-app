@@ -29,7 +29,6 @@ function init_observer() {
                             element.innerHTML = glossary_replace(element.innerHTML);
                             element.innerHTML = pdf_links_replace(element.innerHTML);
                             element.innerHTML = mark_as_mandatory(element.innerHTML);
-
                         });
                     }
                 });
@@ -107,7 +106,6 @@ function pdf_links_replace(html) {
         "(Empfehlung.*?)" + suffix,
         '$1<a target="_blank" href="' + empfurl + '">$2</a>'
     );
-    console.log(r);
     return r;
 }
 
