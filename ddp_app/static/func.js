@@ -1,7 +1,7 @@
-// observer and init
+var glossary;
+
 $(document).ready(function () {
     if (document.querySelector('.project-questions-form') !== null) {
-        var glossary;
         init_observer();
         init_glossary();
         init_mandatory_fields();
