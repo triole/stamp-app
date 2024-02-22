@@ -10,16 +10,9 @@ vars:
 
 tasks:
   default:
-    desc: default rdmo dockers build, from github master
+    desc: install ddp app into a running rdmo container
     cmds:
-      - cmd: ./sh/prepare/render_yaml.sh {{.DC_TEMP}} {{.CONFIG}}
-      - cmd: ./sh/prepare/render_variables_env.sh .
-      - task: build_dockers
-      - task: log
-
-  reload:
-    cmds:
-      - cmd: reload-browser
+      - task: install
 
   install:
     desc: copy ddp app to docker and update local.py
