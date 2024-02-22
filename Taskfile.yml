@@ -26,7 +26,8 @@ tasks:
     method: checksum
     cmds:
       - cmd: docker exec {{.RDMO_CONTAINER}} mkdir -p {{.DDP_APP_FOLDER}}
-      - cmd: docker exec {{.RDMO_CONTAINER}} {{.DDP_APP_FOLDER}}/sh/add_app.sh
+      - cmd: docker cp ./ {{.RDMO_CONTAINER}}:{{.DDP_APP_FOLDER}}
+      - cmd: docker exec {{.RDMO_CONTAINER}} {{.DDP_APP_FOLDER}}/ddp_app/sh/add_app.sh
       - cmd: >-
           docker exec {{.RDMO_CONTAINER}} python {{.RDMO_APP_FOLDER}}/manage.py
           collectstatic --no-input
