@@ -1,29 +1,31 @@
 #!/bin/bash
 
-srcfol="${RDMO_APP}"
-if [[ -z "${srcfol}" ]]; then
+rdmo_app_fol="${RDMO_APP}"
+ddp_app_fol="$(
+  find / -type d 2>/dev/null | grep -E "ddp-app/sh$" | grep -Po ".*(?=\/)"
+)"
+
+if [[ -z "${rdmo_app_fol}" ]]; then
   echo "can not find rdmo source folder"
   exit 1
 fi
 
-lpy="${srcfol}/config/settings/local.py"
-
-function contains() {
-  r="true"
-  cat "${lpy}" | grep -c "${1}" >/dev/null 2>&1 || r="false"
-  echo "${r}"
-}
+lpy="${rdmo_app_fol}/config/settings/local.py"
 
 function append() {
-  if [[ $(contains "${1}") == "false" ]]; then
-    echo -e "Append\n\n\"${2}\"\n\nto \"${lpy}\n\""
-    echo -e "${2}" >>"${lpy}"
-  fi
+  r="true"
+  grep "${1}" "${lpy}" >/dev/null 2>&1 ||
+    {
+      echo -e "append to ${lpy}\n\"${1}\n\""
+      echo -e "${1}" >>"${lpy}"
+    }
+
 }
 
-impsys=""
-cat "${lpy}" | grep "import sys" >/dev/null 2>&1 || impsys="import sys"
+append "import sys"
+append "sys.path.append('${ddp_app_fol}')"
+append "INSTALLED_APPS.append('ddp_app')"
+append "STATICFILES_DIRS = []"
+append "STATICFILES_DIRS.append('${ddp_app_fol}/ddp_app/static')"
 
-append \
-  "ddp_app" \
-  "${impsys}\nsys.path.append('/'${srcfol}'/ddp-app')\nINSTALLED_APPS = ['ddp_app'] + INSTALLED_APPS"
+cd "${rdmo_app_fol}" && python manage.py collectstatic --no-input
