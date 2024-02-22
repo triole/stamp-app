@@ -13,10 +13,13 @@ fi
 lpy="${rdmo_app_fol}/config/settings/local.py"
 
 function append() {
-  r="true"
-  grep "${1}" "${lpy}" >/dev/null 2>&1 ||
+  grp="${1}"
+  if [[ -n "${2}" ]]; then
+    grp="${2}"
+  fi
+  grep "${grp}" "${lpy}" >/dev/null 2>&1 ||
     {
-      echo -e "append to ${lpy}\n\"${1}\n\""
+      echo -e "append to ${lpy}\n\  ${1}\n"
       echo -e "${1}" >>"${lpy}"
     }
 
@@ -25,7 +28,7 @@ function append() {
 append "import sys"
 append "sys.path.append('${ddp_app_fol}')"
 append "INSTALLED_APPS.append('ddp_app')"
-append "STATICFILES_DIRS = []"
+append "STATICFILES_DIRS = []" "STATICFILES_DIRS = \[\]"
 append "STATICFILES_DIRS.append('${ddp_app_fol}/ddp_app/static')"
 
 cd "${rdmo_app_fol}" && python manage.py collectstatic --no-input
