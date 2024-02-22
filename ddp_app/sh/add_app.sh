@@ -2,7 +2,7 @@
 
 rdmo_app_fol="${RDMO_APP}"
 ddp_app_fol="$(
-  find / -type d 2>/dev/null | grep -E "ddp-app/sh$" | grep -Po ".*(?=\/)"
+  find / -type d 2>/dev/null | grep -E "ddp_app/sh$" | grep -Po "^.*(?=\/.*\/)"
 )"
 
 if [[ -z "${rdmo_app_fol}" ]]; then
@@ -19,7 +19,7 @@ function append() {
   fi
   grep "${grp}" "${lpy}" >/dev/null 2>&1 ||
     {
-      echo -e "append to ${lpy}\n\  ${1}\n"
+      echo -e "append to ${lpy}\n  ${1}\n"
       echo -e "${1}" >>"${lpy}"
     }
 
