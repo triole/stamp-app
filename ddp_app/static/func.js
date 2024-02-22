@@ -48,49 +48,6 @@ function init_observer() {
 }
 
 // glossary
-function init_glossary() {
-  glossary_add_info_div()
-  $.getJSON('/static/glossary.json')
-    .done(function (gl) {
-      glossary = gl
-    })
-    .fail(function (jqxhr, textStatus, error) {
-      var err = textStatus + ', ' + error
-      console.error('Error getting glossary json: ', err)
-    })
-}
-
-function glossary_replace(html) {
-  if (html !== undefined) {
-    var r = html
-    Object.keys(glossary).forEach(function (term) {
-      var func_call = "glossary_display_term('" + term + "', this)"
-      if (r.includes(term) === true && html.includes(func_call) === false) {
-        r = rxreplace(
-          r,
-          ' ' + term + ' ',
-          ' <a href="#" onclick="' + func_call + '">' + term + '</a> ',
-        )
-      }
-    })
-  }
-  return r
-}
-
-function glossary_display_term(term, clicked_element) {
-  var pos = get_postion(clicked_element)
-  var el = $('#glossary_info')
-  el.empty()
-  el.css('left', pos[0])
-  el.css('top', pos[1] + 20)
-  el.append(glossary[term])
-  el.toggle()
-}
-
-function glossary_add_info_div() {
-  $('body').append('<div id="glossary_info"></div>')
-}
-
 // pdf links
 function pdf_links_replace(html) {
   var empfurl = 'https://www.forschungsdaten-bildung.de/files/Stamp_Empfehlungen.pdf'
