@@ -12,8 +12,7 @@ function init_glossary_observer() {
       var newNodes = mutation.addedNodes
       if (newNodes !== null) {
         $(newNodes).each(function () {
-          // format help text
-          var elements = $(this).find('.form-label>p, .help-text>p')
+          var elements = $(this).find('p')
           if ($(this).length > 0) {
             if ($(this)[0].parentNode !== null) {
               if ($(this)[0].parentNode.className.includes('help-text')) {
@@ -62,7 +61,7 @@ function glossary_replace(html) {
       if (r.includes(term) === true && html.includes(func_call) === false) {
         r = rxreplace(
           r,
-          ' ' + term + ' ',
+          term,
           ' <a href="#" onclick="' + func_call + '">' + term + '</a> ',
         )
       }
@@ -93,7 +92,7 @@ function get_postion(selector) {
 }
 
 function rxreplace(str, rx, replacer) {
-  var reg = new RegExp(rx, 'g')
+  var reg = new RegExp('(^| )' + rx + '( |$)', 'g')
   var r = str.replace(reg, replacer)
   return r
 }
