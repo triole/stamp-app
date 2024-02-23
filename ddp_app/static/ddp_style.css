@@ -1,3 +1,7 @@
+.form_label {
+    font-weight: unset;
+}
+
 .ng-binding.form-label {
     font-weight: normal;
 }

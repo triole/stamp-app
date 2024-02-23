@@ -27,7 +27,7 @@ function append() {
 
 append "import sys"
 append "sys.path.append('${ddp_app_fol}')"
-append "INSTALLED_APPS.append('ddp_app')"
+append "INSTALLED_APPS = ['ddp_app'] + INSTALLED_APPS" "INSTALLED_APPS = \['ddp_app'\] + INSTALLED_APPS"
 append "STATICFILES_DIRS = []" "STATICFILES_DIRS = \[\]"
 append "STATICFILES_DIRS.append('${ddp_app_fol}/ddp_app/static')"
 
