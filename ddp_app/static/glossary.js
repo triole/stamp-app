@@ -30,13 +30,14 @@ function init_glossary_observer() {
     })
   })
 
-  observer.observe(target, {
-    attributes: true,
-    childList: true,
-    characterData: true,
-    subtree: true,
-  })
-
+  if (target !== null) {
+    observer.observe(target, {
+      attributes: true,
+      childList: true,
+      characterData: true,
+      subtree: true,
+    })
+  }
   // observer.disconnect();
 }
 
