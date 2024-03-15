@@ -3,6 +3,16 @@ var glossary
 window.addEventListener('load', function () {
   init_glossary()
   init_glossary_observer()
+
+  $('.content').click(function (event) {
+    var named_item = event.target.attributes.getNamedItem('onclick')
+    if (named_item !== null) {
+      if (/.*toggle_term.*/.test(named_item.value)) {
+        return
+      }
+    }
+    $('#glossary_info').css('display', 'none')
+  })
 })
 
 function init_glossary_observer() {
@@ -45,7 +55,15 @@ function init_glossary() {
   glossary_add_info_div()
   $.getJSON('/static/glossary.json')
     .done(function (gl) {
-      glossary = gl
+      var arr = []
+      for (var key in gl) {
+        if (gl.hasOwnProperty(key)) {
+          arr.push([key, gl[key]])
+        }
+      }
+      glossary = arr.sort(function (a, b) {
+        return b[0].length - a[0].length
+      })
     })
     .fail(function (jqxhr, textStatus, error) {
       var err = textStatus + ', ' + error
@@ -55,18 +73,21 @@ function init_glossary() {
 
 function glossary_replace(html) {
   var r = ''
+  var excl = []
   if (html !== undefined) {
     r = html
-    Object.keys(glossary).forEach(function (term) {
-      var func_call = "toggle_term('" + term + "', this)"
-      if (r.includes(term) === true && html.includes(func_call) === false) {
-        r = rxreplace(
-          r,
-          term,
-          ' <a href="#" onclick="' + func_call + '">' + term + '</a> ',
+    for (var idx = 0; idx < glossary.length; idx++) {
+      var el = glossary[idx]
+      var rx_to_replace = new RegExp('(^| )(' + el[0] + ')(\.|,| |$)', 'g')
+      var rx_to_test = new RegExp('(^| |>)(' + el[0] + ')(\.|,|<| |$)', 'g')
+      if (excl.includes(el[0]) === false && rx_to_test.test(html)) {
+        r = r.replace(
+          rx_to_replace,
+          ' <a class="glossary_term" href="#" onclick="toggle_term(' + idx + ', this)">$2</a> ',
         )
+        excl.push(...el[0].split(' '))
       }
-    })
+    }
   }
   return r
 }
@@ -78,7 +99,7 @@ function toggle_term(term, clicked_element) {
     el.empty()
     el.css('left', pos[0])
     el.css('top', pos[1] + 20)
-    el.append(glossary[term])
+    el.append(glossary[term][1])
   }
   el.toggle()
 }
@@ -88,12 +109,9 @@ function glossary_add_info_div() {
 }
 
 function get_postion(selector) {
-  var off = $(selector).offset()
-  return [off.left, off.top]
-}
-
-function rxreplace(str, rx, replacer) {
-  var reg = new RegExp('(^| )' + rx + '( |$)', 'g')
-  var r = str.replace(reg, replacer)
-  return r
+  if (selector !== null) {
+    var off = $(selector).offset()
+    return [off.left, off.top]
+  }
+  return null
 }
