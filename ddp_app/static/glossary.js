@@ -73,23 +73,47 @@ function init_glossary() {
 
 function glossary_replace(html) {
   var r = ''
-  var excl = []
   if (html !== undefined) {
     r = html
+    var excl = []
     for (var idx = 0; idx < glossary.length; idx++) {
       var el = glossary[idx]
-      var rx_to_replace = new RegExp('(^| )(' + el[0] + ')(\.|,| |$)', 'g')
-      var rx_to_test = new RegExp('(^| |>)(' + el[0] + ')(\.|,|<| |$)', 'g')
-      if (excl.includes(el[0]) === false && rx_to_test.test(html)) {
+      var rep = make_replacer(el[0])
+      if (!already_replaced(rep.arr_raw, excl)) {
         r = r.replace(
-          rx_to_replace,
+          rep.to_replace,
           ' <a class="glossary_term" href="#" onclick="toggle_term(' + idx + ', this)">$2</a> ',
         )
-        excl.push(...el[0].split(' '))
+        excl.push(...rep.arr_raw)
       }
     }
   }
   return r
+}
+
+function make_replacer(str) {
+  var rep = {}
+  rep.word_raw = str
+  rep.arr_raw = str.split(' ')
+  rep.arr_advanced = []
+  rep.arr_raw.forEach(function (el) {
+    rep.arr_advanced.push(el + '[a-z]{0,1}')
+  })
+  rep.join_advanced = rep.arr_advanced.join(' ')
+  rep.to_replace = new RegExp('(^| )(' + rep.join_advanced + ')(\\.|,| |$)', 'g')
+  rep.to_test = new RegExp('(^| |>)(' + rep.join_advanced + ')(\\.|,|<| |$)', 'g')
+  return rep
+}
+
+function already_replaced(str, excl) {
+  var b = false
+  excl.forEach(function (el) {
+    if (el.length > 3 && el === str) {
+      b = true
+      return
+    }
+  })
+  return b
 }
 
 function toggle_term(term, clicked_element) {
