@@ -3,8 +3,8 @@ version: '3'
 
 vars:
   RDMO_CONTAINER:
-    sh: docker ps --format "{{.Names}}" | grep "rdmo" | grep -Po
-      "^[0-9a-f]+"
+    sh: docker ps --format "{{.Names}}" | grep "rdmo" | grep "stamp"
+      | grep -Po "^[0-9a-f]+"
   RDMO_APP_FOLDER: /vol/rdmo-app
   DDP_APP_FOLDER: /vol/ddp-app
 
